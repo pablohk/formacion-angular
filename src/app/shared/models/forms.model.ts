@@ -1,6 +1,6 @@
 export type Genero = 'masculino' | 'femenino' | 'otro' | '';
 
-export interface DatosPersonales {
+export interface IDatosPersonales {
   nombre: string;
   apellido: string;
   fechaNacimiento: Date | string;
@@ -8,7 +8,7 @@ export interface DatosPersonales {
   estadoCivil?: string;
 }
 
-export interface DatosLaborales {
+export interface IDatosLaborales {
   ocupacion: string;
   empresa?: string;
   puesto?: string;
@@ -16,7 +16,7 @@ export interface DatosLaborales {
   salarioMensual?: number;
 }
 
-export interface DatosContacto {
+export interface IDatosContacto {
   email: string;
   telefono: string;
   direccion: string;
@@ -25,16 +25,16 @@ export interface DatosContacto {
   pais: string;
 }
 
-export interface DatosAcademicos {
+export interface IDatosAcademicos {
   nivelEstudios: string;
   institucion: string;
   anioGraduacion?: number;
   carrera?: string;
 }
 
-export interface UsuarioFormulario {
-  datosPersonales: DatosPersonales;
-  datosLaborales: Array<DatosLaborales>;
-  datosContacto: DatosContacto;
-  datosAcademicos: Array<DatosAcademicos>;
+export interface IUsuarioFormulario {
+  datosPersonales: IDatosPersonales;
+  datosLaborales: Array<IDatosLaborales>;
+  datosContacto: IDatosContacto;
+  datosAcademicos: Array<IDatosAcademicos>;
 }

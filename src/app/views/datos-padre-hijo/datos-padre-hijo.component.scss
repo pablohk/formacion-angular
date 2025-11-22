@@ -7,6 +7,25 @@
   p {
     color: #7f8c8d;
     font-size: 1.1rem;
+    margin:0;
+    padding: 0;
   }
+  .main-content {
+    margin-top: 1rem;
+    border: 1px solid #34495e;
+    padding: 0.5rem;
+  }
+  .content {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    .item{
+      flex-basis: 48%;
+      >p {
+        padding: 0.5rem 0;
+      }
+    }
+  }
+
 }
 

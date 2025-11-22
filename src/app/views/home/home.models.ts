@@ -1,4 +1,4 @@
-export interface Topic {
+export interface ITopic {
     id: string;
     title: string;
     subtitle?: string;
@@ -6,7 +6,7 @@ export interface Topic {
     completed?: boolean;
   }
   
-  export const COURSE_TOPICS: Array<Topic> =[
+  export const COURSE_TOPICS: Array<ITopic> =[
     {
       id: '1',
       title: 'Patrones de diseño',

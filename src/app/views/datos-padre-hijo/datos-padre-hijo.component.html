@@ -1,5 +1,21 @@
 <div class="container">
   <h1>Datos Padre-Hijo</h1>
   <p>Aquí se trabajará con el flujo de información entre componentes padre e hijo.</p>
-</div>
+  <div class="main-content">
+    <p>Contenedor pricipal: renderiza el componente Padre</p>
+    <input type="text" [value]="info()" #inputInfo />
+    <button (click)="setInfo(inputInfo.value)">Setear</button>
+    <button (click)="setInfo()">Borrar</button>
 
+    <div  class="content">
+      <div class="item">
+        <p>Haciendo prop drilling</p>
+        <app-padre-a [info]="info()"></app-padre-a>
+      </div>
+      <div class="item">
+        <p>Usando un servicio compartido</p>
+        <app-padre-a [info]="info()"></app-padre-a>
+      </div>
+    </div>
+  </div>
+</div>
