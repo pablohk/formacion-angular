@@ -1,0 +1,11 @@
+<li>
+  <a href="#" class="nav-link" [class.collapsed]="collapsed()" [routerLink]="route()" routerLinkActive="active">
+    @if (iconSvg()) {
+      <span [innerHTML]="getSafeSvg()"></span>
+    } @else {
+      <ng-content></ng-content>
+    }
+    <span *ngIf="!collapsed()">{{ label() }}</span>
+  </a>
+</li>
+

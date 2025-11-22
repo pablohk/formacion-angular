@@ -1,10 +1,12 @@
-import { Component, input, output, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, input, output, ChangeDetectionStrategy, ViewEncapsulation, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NavItemComponent } from './sub-components/nav-item/nav-item.component';
+import { NavItem } from './nav-item.model';
+import { SIDEBAR_ITEMS_DATA } from './sidebar.model';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, NavItemComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,6 +15,8 @@ import { CommonModule } from '@angular/common';
 export class SidebarComponent {
   collapsed = input.required<boolean>();
   toggle = output<void>();
+
+  navItems = signal<NavItem[]>(SIDEBAR_ITEMS_DATA);
 
   onToggle(): void {
     this.toggle.emit();

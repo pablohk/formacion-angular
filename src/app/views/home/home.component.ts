@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, ViewEncapsulation, signal } from '@angular/core';
-import { TopicItemComponent } from '../../shared/components/topic-item/topic-item.component';
+import { TopicItemComponent } from './sub-components/topic-item/topic-item.component';
 import { COURSE_TOPICS, Topic } from './home.models';
 
 

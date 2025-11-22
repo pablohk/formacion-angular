@@ -6,6 +6,10 @@ export const routes: Routes = [
     loadComponent: () => import('./views/home/home.component').then(m => m.HomeComponent)
   },
   {
+    path: 'datos-padre-hijo',
+    loadComponent: () => import('./views/datos-padre-hijo/datos-padre-hijo.component').then(m => m.DatosPadreHijoComponent)
+  },
+  {
     path: 'formulario-simple',
     loadComponent: () => import('./views/formulario-simple/formulario-simple.component').then(m => m.FormularioSimpleComponent)
   },
