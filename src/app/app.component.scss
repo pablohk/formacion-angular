@@ -1,0 +1,22 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+// Main Content Area
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #f5f6fa;
+  padding: 1rem;
+}
+
+// Responsive Design
+@media (max-width: 48rem) {
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
