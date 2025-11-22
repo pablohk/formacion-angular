@@ -2,6 +2,7 @@
   <p>Componente Hijo A.</p>
   <app-nieto-a 
     class="content" 
-    [info]="info()">
+    [info]="info()"
+    (changeOutput)="handleChange($event)">
   </app-nieto-a>
 </div>

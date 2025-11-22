@@ -1,4 +1,10 @@
 <div class="nieto-a-container">
   <p>Componente Nieto A.</p>
   <p class="info">{{ info() }}</p>
+  <div class="actions">
+      <input type="text" [value]="info()" #inputInfo />
+
+    <button (click)="handleChange(inputInfo.value)">Setear</button>
+    <button (click)="handleChange()">Borrar</button>
+  </div>
 </div>

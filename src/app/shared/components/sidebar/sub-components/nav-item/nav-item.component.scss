@@ -5,7 +5,7 @@ li {
 .nav-link {
   display: flex;
   align-items: center;
-  padding: 1rem 1.5rem;
+  padding: 1rem 0.5rem;
   color: #bdc3c7;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -40,8 +40,6 @@ li {
   padding: 1rem;
 
   span {
-    opacity: 0;
-    width: 0;
     overflow: hidden;
   }
 }

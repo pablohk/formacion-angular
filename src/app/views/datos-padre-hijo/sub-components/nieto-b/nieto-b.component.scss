@@ -1,0 +1,39 @@
+:host {
+    display: block;
+
+    p {
+        color: black;
+        font-size: 1.1rem;
+        margin: 0;
+        padding: 0.25rem;
+    }
+}
+
+.nieto-b-container {
+    border: 1px solid blue;
+
+    p {
+        background-color: rgb(174, 174, 255);
+        border-bottom: 1px solid blue;
+    }
+
+    .content {
+        padding: 0.5rem;
+    }
+
+    .info {
+        background-color: white;
+        border-bottom: none;
+    }
+
+    .actions {
+        padding: 0.1rem;
+        display: flex;
+        flex-flow: row wrap;
+        gap: 0.25rem;
+
+        >input {
+            flex-grow: 1;
+        }
+    }
+}

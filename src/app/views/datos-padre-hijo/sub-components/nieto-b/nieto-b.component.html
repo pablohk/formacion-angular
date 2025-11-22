@@ -1,0 +1,14 @@
+<div class="nieto-b-container">
+    <p>Componente Nieto B.</p>
+    <p class="info">
+        {{ infoB() }}
+    </p>
+    <!-- <p>{{padreHijoService.getInfoBSnapshot()}}</p> -->
+    <!-- <p>{{padreHijoService.getInfoB()()}}</p> -->
+
+    <div class="actions">
+        <input type="text" [value]="infoB()" #inputInfoB />
+        <button (click)="handleChangeB(inputInfoB.value)">Setear</button>
+        <button (click)="handleChangeB()">Borrar</button>
+    </div>
+</div>

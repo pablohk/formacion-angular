@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-nieto-a',
@@ -10,4 +10,9 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
 })
 export class NietoA { 
   info= input<string>();
+  changeOutput = output<string>();
+
+  handleChange(value?: string): void {
+    this.changeOutput.emit(value || 'Escriba de nuevo...');
+  }
 }

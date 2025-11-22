@@ -1,12 +1,14 @@
 :host {
   display: block;
+
   p {
     color: black;
     font-size: 1.1rem;
     margin: 0;
-    padding: 1rem;
+    padding: 0.25rem;
   }
 }
+
 .nieto-a-container {
   border: 1px solid blue;
 
@@ -14,10 +16,24 @@
     background-color: rgb(174, 174, 255);
     border-bottom: 1px solid blue;
   }
+
   .content {
     padding: 0.5rem;
   }
+
   .info {
     background-color: white;
+    border-bottom: none;
+  }
+
+  .actions {
+    padding: 0.1rem;
+    display: flex;
+    gap: 0.25rem;
+    flex-flow: row wrap;
+
+    >input {
+      flex-grow: 1;
+    }
   }
 }

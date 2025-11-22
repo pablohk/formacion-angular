@@ -2,5 +2,7 @@
   <p>Componente Padre A</p>
   <app-hijo-a 
     class="content" 
-    [info]="info()" />
+    [info]="info()" 
+    (changeOutput)="handleChange($event)"
+    />
 </div>
