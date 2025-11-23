@@ -1,0 +1,21 @@
+<div class="form-container">
+  <h1>Patrones de diseño</h1>
+
+  <section class="example">
+    <p>Ejemplo de Two-way Binding ([(ngModel)])</p>
+    <p>Este ejemplo muestra cómo enlazar un input y un select bidireccionalmente con la propiedad del componente.</p>
+
+    <div class="field">
+      <label for="ejemploTexto">Texto ([(ngModel)])</label>
+      <input id="ejemploTexto" name="ejemploTexto" type="text" [(ngModel)]="ejemploTexto" />
+    </div>
+
+    <div class="result">
+      <p><strong>Valor actual del texto:</strong> {{ ejemploTexto }}</p>
+    </div>
+
+    <div class="actions">
+      <button type="button" (click)="clearEjemplo()">Limpiar ejemplo</button>
+    </div>
+  </section>
+</div>

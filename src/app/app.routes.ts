@@ -17,7 +17,15 @@ export const routes: Routes = [
     path: 'formulario-complejo',
     loadComponent: () => import('./views/formulario-complejo/formulario-complejo.component').then(m => m.FormularioComplejoComponent)
   },
+  {
+    path: 'patrones-diseno',
+    loadComponent: () => import('./views/patrones-diseno/patrones-diseno.component').then(m => m.PatronesDisenoComponent)
+  },
     {
+    path: 'pipes-examples',
+    loadComponent: () => import('./views/pipes-examples/pipes-examples.component').then(m => m.PipesExamplesComponent)
+  },
+  {
     path: 'referencias',
     loadComponent: () => import('./views/referencias/referencias.component').then(m => m.ReferenciasComponent)
   },

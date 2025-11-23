@@ -1,0 +1,40 @@
+<div class="pipes-examples-container">
+  <h1>Pipes de Ejemplo</h1>
+
+  <div class="examples-grid">
+    <article class="example-card">
+      <h3>Texto</h3>
+      <p><strong>Original: </strong> <code>hola Mundo</code></p>
+      <p><strong>Uppercase: </strong> <span>{{'hola Mundo' | uppercase }}</span></p>
+      <p><strong>Lowercase: </strong> <span>{{'Hola Mundo' | lowercase }}</span></p>
+      <p><strong>Titlecase: </strong> <span>{{ 'hola mundo angular' | titlecase }}</span></p>
+    </article>
+
+    <article class="example-card">
+      <h3>Números y Moneda</h3>
+      <p><strong>Number: (12345.6789) </strong> <span>{{12345.6789 | number:'1.2-2' }}</span></p>
+      <p><strong>Currency 12345.6789 (EUR): </strong> <span>{{12345.6789 | currency:'EUR':'symbol':'1.2-2' }}</span></p>
+      <p><strong>Percent: (0.256) </strong> <span>{{0.256 | percent:'1.0-1' }}</span></p>
+    </article>
+
+    <article class="example-card">
+      <h3>Fecha</h3>
+      <p><strong>Timestamp (1700832000000) :</strong> <span>{{ 1700832000000 | date:'longDate' }}</span></p>
+    </article>
+
+    <article class="example-card">
+      <h3>Arrays / JSON</h3>
+      <p><strong>Array slice ([1,2,3,4,5] ): </strong><span>{{[1,2,3,4,5] | slice:1:4 }}</span></p>
+      <p><strong>['Ana','Luis'] to JSON: </strong> <span>{{['Ana','Luis'] | json }}</span></p>
+    </article>
+
+    <article class="example-card">
+      <h3>Personalizadas</h3>
+      <p><strong>Truncar original: </strong><span title="Este es un texto largo para mostrar">{{ 'Este es un texto largo
+          para mostrar'}}</span>
+        -> <span title="Este es un texto largo para mostrar">{{ 'Este es un texto largo para mostrar' | tooltip:13
+          }}</span></p>
+    </article>
+  </div>
+
+</div>

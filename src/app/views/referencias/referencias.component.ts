@@ -13,7 +13,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 export class ReferenciasComponent {
   protected readonly referenciasUrl: Array<string> = [
     'https://angular.dev/guide/di/defining-dependency-providers',
-    'https://www.paradigmadigital.com/dev/patron-contenedor-presentadores-aplicado-desarrollo-angular/'
+    'https://www.paradigmadigital.com/dev/patron-contenedor-presentadores-aplicado-desarrollo-angular/',
+    'https://www.linkedin.com/pulse/angular-vs-react-data-binding-explained-muhammed-akil-lcoqf/'
   ];
 
   constructor(private sanitizer: DomSanitizer) {}
