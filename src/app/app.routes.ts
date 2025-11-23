@@ -17,10 +17,13 @@ export const routes: Routes = [
     path: 'formulario-complejo',
     loadComponent: () => import('./views/formulario-complejo/formulario-complejo.component').then(m => m.FormularioComplejoComponent)
   },
+    {
+    path: 'referencias',
+    loadComponent: () => import('./views/referencias/referencias.component').then(m => m.ReferenciasComponent)
+  },
   {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'
   }
 ];
-

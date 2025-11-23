@@ -1,23 +1,28 @@
-<div class="container">
-  <h1>Datos Padre-Hijo</h1>
-  <p>Aquí se trabajará con el flujo de información entre componentes padre e hijo.</p>
-  <p> El contenedor principal pasa la info al componente nieto.
-    Y el componente nieto tiene un input para cambiar la info y emitir el evento hacia el contenedor principal.
-  </p>
-  <div class="main-content">
-    <p>Contenedor pricipal: renderiza el componente Padre</p>
-    <div class="content">
-      <div class="item">
-        <p>Haciendo prop drilling</p>
-        <app-padre-a 
+<section class="dp-container">
+  <header class="dp-header">
+    <h1>Datos Padre‑Hijo</h1>
+    <p class="lead">Aquí se trabaja el flujo de información entre componentes padre, hijo y nieto.</p>
+  </header>
+    <p class="intro">El contenedor principal renderiza los componentes padre y muestra dos enfoques: prop drilling y servicio compartido.</p>
+
+  <main class="dp-main" role="main">
+    <article class="dp-card" aria-labelledby="card-propdrilling">
+      <h2 id="card-propdrilling">Prop drilling</h2>
+      <p class="card-desc">El contenedor pasa la información hacia el componente Padre y, desde el nieto, se emiten eventos hacia arriba.</p>
+      <div class="card-body">
+        <app-padre-a
           [info]="info()"
           (changeOutput)="setInfoA($event)">
         </app-padre-a>
       </div>
-      <div class="item">
-        <p>Usando un servicio compartido</p>
+    </article>
+
+    <article class="dp-card" aria-labelledby="card-service">
+      <h2 id="card-service">Servicio compartido</h2>
+      <p class="card-desc">Uso de un servicio para compartir estado entre componentes sin prop drilling.</p>
+      <div class="card-body">
         <app-padre-b></app-padre-b>
       </div>
-    </div>
-  </div>
-</div>
+    </article>
+  </main>
+</section>

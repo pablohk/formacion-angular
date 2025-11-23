@@ -1,4 +1,60 @@
 <div class="form-container">
   <h1>Formulario Simple</h1>
-  <p>Aquí irá el formulario simple.</p>
+
+  <form [formGroup]="datosPersonalesForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="field">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" type="text" formControlName="nombre" />
+      <div class="error" *ngIf="f['nombre'].touched && f['nombre'].invalid">
+        <small *ngIf="f['nombre'].errors?.['required']">El nombre es obligatorio.</small>
+        <small *ngIf="f['nombre'].errors?.['minlength']">Mínimo 2 caracteres.</small>
+        <small *ngIf="f['nombre'].errors?.['maxlength']">Máximo 50 caracteres.</small>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="apellido">Apellido</label>
+      <input id="apellido" type="text" formControlName="apellido" />
+      <div class="error" *ngIf="f['apellido'].touched && f['apellido'].invalid">
+        <small *ngIf="f['apellido'].errors?.['required']">El apellido es obligatorio.</small>
+        <small *ngIf="f['apellido'].errors?.['minlength']">Mínimo 2 caracteres.</small>
+        <small *ngIf="f['apellido'].errors?.['maxlength']">Máximo 50 caracteres.</small>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="fechaNacimiento">Fecha de nacimiento</label>
+      <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento" />
+      <div class="error" *ngIf="f['fechaNacimiento'].touched && f['fechaNacimiento'].invalid">
+        <small *ngIf="f['fechaNacimiento'].errors?.['required']">La fecha de nacimiento es obligatoria.</small>
+        <small *ngIf="f['fechaNacimiento'].errors?.['invalidDate']">Fecha inválida.</small>
+        <small *ngIf="f['fechaNacimiento'].errors?.['futureDate']">La fecha no puede ser posterior a hoy.</small>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="genero">Género</label>
+      <select id="genero" formControlName="genero">
+        <option *ngFor="let g of generoOptions" [value]="g.value">{{ g.label }}</option>
+      </select>
+      <div class="error" *ngIf="f['genero'].touched && f['genero'].invalid">
+        <small *ngIf="f['genero'].errors?.['required']">Seleccione un género.</small>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="estadoCivil">Estado civil (opcional)</label>
+      <input id="estadoCivil" type="text" formControlName="estadoCivil" />
+    </div>
+
+    <div class="actions">
+      <button type="submit" [disabled]="datosPersonalesForm.invalid || !anyValueEntered">Enviar</button>
+      <button type="button" (click)="resetForm()">Limpiar</button>
+    </div>
+  </form>
+
+  <div class="result" *ngIf="submittedData">
+    <h2>Datos enviados</h2>
+    <pre>{{ submittedData | json }}</pre>
+  </div>
 </div>

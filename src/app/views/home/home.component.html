@@ -8,7 +8,7 @@
         [subtitle]="topic.subtitle"
         [subItems]="topic.subItems"
         [completed]="topic.completed ?? false"
-        (toggle)="toggleTopic(topic.id)">
+        (toggle)="handleToggleTopic(topic.id)">
       </app-topic-item>
     }
   </ul>

@@ -1,7 +1,6 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { TopicItemComponent } from './sub-components/topic-item/topic-item.component';
-import { COURSE_TOPICS, ITopic } from './home.models';
-
+import { HomeService } from './home.service';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +11,14 @@ import { COURSE_TOPICS, ITopic } from './home.models';
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class HomeComponent {
-  public topics = signal<ITopic[]>(COURSE_TOPICS);
+  public topics: any;
 
-  toggleTopic(id: string): void {
-    this.topics.update(topics => {
-      return topics.map(topic => 
-        topic.id === id 
-          ? { ...topic, completed: !topic.completed }
-          : topic
-      );
-    });
+  constructor(private homeService: HomeService) {
+    // reexportamos la señal del servicio para que la plantilla la consuma
+    this.topics = this.homeService.topics;
+  }
+
+  handleToggleTopic(id: string): void {
+    this.homeService.toggleTopic(id);
   }
 }

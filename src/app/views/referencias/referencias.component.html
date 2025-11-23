@@ -1,0 +1,18 @@
+<div class="referencia-container">
+  <h1>Referencias</h1>
+  <ul class="reference-list">
+    @for (item of referenciasUrl; track item) {
+    <ng-container  
+      [ngTemplateOutlet]="refItem" 
+      [ngTemplateOutletContext]="{item}">
+    </ng-container>
+    }
+  </ul>
+
+</div>
+
+<ng-template #refItem let-item="item">
+  <li>
+    <a [href]="getSafeUrl(item)" target="_blank" rel="noopener noreferrer">{{ item }}</a>
+  </li>
+</ng-template>
