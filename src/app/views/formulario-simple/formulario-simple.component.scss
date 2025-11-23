@@ -12,84 +12,29 @@
     color: #7f8c8d;
     font-size: 1.1rem;
   }
-}
-
-.form-container {
-  max-width: 520px;
-  margin: 1rem auto;
-  padding: 1rem;
-  background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-
-  .field {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0.75rem;
-
-    label {
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-      color: #34495e;
-    }
-
-    input,
-    select {
-      padding: 0.45rem 0.6rem;
-      border: 1px solid #dfe6e9;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-
-    .error {
-      color: #c0392b;
-      margin-top: 0.35rem;
-
-      small {
-        font-size: 0.85rem;
-      }
-    }
-  }
-
-  .actions {
+  .tab-bar {
     display: flex;
     gap: 0.5rem;
-    margin-top: 0.5rem;
+    margin: 0.75rem 0 1rem 0;
 
     button {
-      padding: 0.5rem 0.8rem;
+      padding: 0.45rem 0.8rem;
+      border: 1px solid #dfe6e9;
+      background: #fff;
       border-radius: 4px;
-      border: none;
       cursor: pointer;
-
-      &:disabled,
-      &[disabled] {
-        opacity: 0.55;
-        cursor: default;
-        pointer-events: none;
-        box-shadow: none;
-        filter: grayscale(0.02);
-      }
-    }
-
-    button[type="submit"] {
-      background: #3498db;
-      color: #fff;
-    }
-
-    button[type="button"] {
-      background: #ecf0f1;
+      font-weight: 600;
       color: #2c3e50;
+
+      &.active {
+        background: #3498db;
+        color: #fff;
+        border-color: #3498db;
+      }
     }
   }
 
-  .result {
-    margin-top: 1rem;
-
-    pre {
-      background: #f6f8fa;
-      padding: 0.75rem;
-      border-radius: 4px;
-    }
+  .tab-panel {
+    margin-top: 0.5rem;
   }
 }
