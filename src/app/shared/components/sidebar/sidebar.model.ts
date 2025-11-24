@@ -15,6 +15,11 @@ export const SIDEBAR_ITEMS_DATA = [
       iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.77,15.82a1.92,1.92,0,0,1-1.91-1.91V9.14A6.69,6.69,0,0,0,8.18,2.45H1.5V8.18H7.23a1.92,1.92,0,0,1,1.91,1.91v4.77a6.69,6.69,0,0,0,6.68,6.69H22.5V15.82Z"></path><line x1="7.23" y1="12" x2="16.77" y2="12"></line><line  x1="1.5" y1="0.55" x2="1.5" y2="10.09"></line><line x1="22.5" y1="13.91" x2="22.5" y2="23.45"></line></svg>'
     },
     {
+      route: '/gestor-estado',
+      label: 'Gestor Estado',
+      iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06A2 2 0 1 1 2.28 16.9l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09c.7 0 1.27-.42 1.51-1a1.65 1.65 0 0 0-.33-1.82L4.36 3.4A2 2 0 1 1 7.19.57l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V.5A2 2 0 1 1 15 0v.09c.7 0 1.27.42 1.51 1a1.65 1.65 0 0 0 1.82.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c0 .38.14.74.39 1.01z"></path></svg>'
+    },
+    {
       route: '/datos-padre-hijo',
       label: 'Datos Padre-Hijo',
       iconSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>'

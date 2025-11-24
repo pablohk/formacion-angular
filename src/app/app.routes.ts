@@ -21,7 +21,11 @@ export const routes: Routes = [
     path: 'patrones-diseno',
     loadComponent: () => import('./views/patrones-diseno/patrones-diseno.component').then(m => m.PatronesDisenoComponent)
   },
-    {
+  {
+    path: 'gestor-estado',
+    loadComponent: () => import('./views/gestor-estado/gestor-estado.component').then(m => m.GestorEstadoComponent)
+  },
+  {
     path: 'pipes-examples',
     loadComponent: () => import('./views/pipes-examples/pipes-examples.component').then(m => m.PipesExamplesComponent)
   },
