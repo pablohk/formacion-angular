@@ -1,12 +1,45 @@
-<div class="layout">
-  <!-- Sidebar Navigation -->
-  <app-sidebar 
-    [collapsed]="sidebarCollapsed()" 
-    (toggle)="toggleSidebar()">
-  </app-sidebar>
+<div class="app-container">
+  <header class="top-menu">
+    <div class="top-menu-inner">
+      <div class="actions">
+          <button type="button" class="btn" (click)="setGlobalLoading(true)">Iniciar carga</button>
+          <button type="button" class="btn" (click)="setGlobalLoading(false)">Detener carga</button>
+          <button type="button" class="btn" (click)="setShowAdviseModal(!showAdviseModal())">Aviso</button>
+      </div>
+      <div class="status">
+        <span *ngIf="globalLoading()" class="loading">Cargando...</span>
+        <span *ngIf="!globalLoading()" class="idle">Inactivo</span>
+      </div>
+    </div>
+  </header>
+  <ng-container *ngIf="showAdviseModal(); then adviseModal"></ng-container>
 
-  <!-- Main Content Area -->
-  <main class="main-content">
-    <router-outlet></router-outlet>
-  </main>
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <app-sidebar [collapsed]="sidebarCollapsed()" (toggle)="toggleSidebar()">
+    </app-sidebar>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>
+
+  <!-- Advise Modal rendered from template -->
+
+  <ng-template #adviseModal>
+    <div class="advise-modal-overlay" (click)="setShowAdviseModal(false)">
+      <div class="advise-modal" role="dialog" aria-modal="true" (click)="$event.stopPropagation()">
+        <header class="advise-header">
+          <h3>Aviso</h3>
+        </header>
+        <div class="advise-body">
+          <p>Este es un aviso global. Puedes cerrarlo con el botón abajo.</p>
+        </div>
+        <footer class="advise-footer">
+          <button type="button" class="btn primary" (click)="setShowAdviseModal(false)">Cerrar</button>
+        </footer>
+      </div>
+    </div>
+  </ng-template>

@@ -12,4 +12,43 @@
     color: #7f8c8d;
     font-size: 1.1rem;
   }
+
+  .controls {
+    margin-top: 1.25rem;
+
+    h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.25rem;
+      color: #2c3e50;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+
+      .btn {
+        padding: 0.45rem 0.75rem;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .primary { background: #3498db; color: #fff; }
+      .secondary { background: #ecf0f1; color: #2c3e50; }
+      .danger { background: #e74c3c; color: #fff; }
+    }
+
+    .status {
+      margin-top: 0.75rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      color: #6b7280;
+    }
+
+    .loading { font-weight: 600; color: #0f172a; }
+    .error { color: #b91c1c; font-weight: 600; }
+    .modal-active { color: #0b6bf0; font-weight: 600; }
+  }
 }

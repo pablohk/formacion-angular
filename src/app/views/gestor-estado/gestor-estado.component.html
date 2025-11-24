@@ -1,4 +1,22 @@
 <div class="gestor-estado-container">
   <h1>Gestor de Estado</h1>
   <p>Hay muchas formas de hacerlo. Yo últimamente prefiero generar un store con signals o con BehaviorSubject de RXJS.</p>
+  <p>Lo vamos a implementar con signals, dejo para el que quiera hacerlo con RXJS.</p>
+
+  <section class="controls">
+    <div class="actions">
+      <button type="button" class="btn primary" (click)="setGlobalLoading(true)">Iniciar carga</button>
+      <button type="button" class="btn secondary" (click)="setGlobalLoading(false)">Detener carga</button>
+      <button type="button" class="btn danger" (click)="setGlobalError('Error desde gestor-estado')">Set Error</button>
+      <button type="button" class="btn secondary" (click)="setGlobalError(null)">Clear Error</button>
+      <button type="button" class="btn secondary" (click)="setShowAdviseModal(!showAdviseModal())">Toggle Modal</button>
+    </div>
+
+    <div class="status">
+      <span *ngIf="globalLoading()" class="loading">Cargando...</span>
+      <span *ngIf="!globalLoading()" class="idle">Inactivo</span>
+      <span *ngIf="globalError()" class="error">{{ globalError() }}</span>
+      <span *ngIf="showAdviseModal()" class="modal-active">Modal: abierto</span>
+    </div>
+  </section>
 </div>

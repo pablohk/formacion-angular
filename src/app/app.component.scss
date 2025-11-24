@@ -1,15 +1,94 @@
-.layout {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
+.app-container {
+  .layout {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  // Main Content Area
+  .main-content {
+    flex: 1;
+    overflow-y: auto;
+    background-color: #f5f6fa;
+    padding: 1rem;
+  }
+
+  .top-menu {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e6e9ef;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+
+    .top-menu-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+
+      .btn {
+        padding: 0.45rem 0.7rem;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+         background: #3498db;
+        color: #fff;
+      }
+    }
+
+    .status {
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+
+    .loading {
+      color: #0f172a;
+      font-weight: 600;
+    }
+  }
+
+  /* Modal styles for advise modal */
+  .advise-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(11, 14, 22, 0.45);
+    z-index: 1200;
+    padding: 1rem;
+  }
+
+  .advise-modal {
+    background: #fff;
+    border-radius: 8px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 8px 30px rgba(2,6,23,0.2);
+    overflow: hidden;
+  }
+
+  .advise-header {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #eef2f7;
+  }
+
+  .advise-body {
+    padding: 1rem;
+    color: #34495e;
+  }
+
+  .advise-footer {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid #eef2f7;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
 }
-
-// Main Content Area
-.main-content {
-  flex: 1;
-  overflow-y: auto;
-  background-color: #f5f6fa;
-  padding: 1rem;
-}
-
-
