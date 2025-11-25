@@ -1,4 +1,217 @@
 <div class="form-container">
   <h1>Formulario Complejo</h1>
-  <p>Aquí irá el formulario complejo.</p>
+
+  <form class="form" [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+    <section class="section">
+      <h2 class="section__title">Datos personales</h2>
+      <div class="grid grid">
+        <div class="field" formGroupName="datosPersonales">
+          <div class="grid grid">
+            <div class="field">
+              <label for="nombre" class="label">Nombre</label>
+              <input id="nombre" class="input" formControlName="nombre" />
+              <small class="error"
+                *ngIf="usuarioForm.get('datosPersonales.nombre')?.invalid && usuarioForm.get('datosPersonales.nombre')?.touched">
+                El nombre es obligatorio y debe tener al menos 2 caracteres.
+              </small>
+              </div>
+
+              <div class="field">
+                <label for="apellido" class="label">Apellido</label>
+                <input id="apellido" class="input" formControlName="apellido" />
+                <small class="error"
+                  *ngIf="usuarioForm.get('datosPersonales.apellido')?.invalid && usuarioForm.get('datosPersonales.apellido')?.touched">
+                  El apellido es obligatorio.
+                </small>
+              </div>
+
+              <div class="field">
+                <label for="fechaNacimiento" class="label">Fecha de nacimiento</label>
+                <input id="fechaNacimiento" type="date" class="input" formControlName="fechaNacimiento" />
+                <small class="error"
+                  *ngIf="usuarioForm.get('datosPersonales.fechaNacimiento')?.hasError('fechaInvalida') && usuarioForm.get('datosPersonales.fechaNacimiento')?.touched">
+                  La fecha no puede ser futura.
+                </small>
+              </div>
+
+              <div class="field">
+                <label for="genero" class="label">Género</label>
+                <select id="genero" class="input input--select" formControlName="genero">
+                  <option value="">Seleccione</option>
+                  <option value="masculino">Masculino</option>
+                  <option value="femenino">Femenino</option>
+                  <option value="otro">Otro</option>
+                </select>
+                <small class="error"
+                  *ngIf="usuarioForm.get('datosPersonales.genero')?.invalid && usuarioForm.get('datosPersonales.genero')?.touched">
+                  El género es obligatorio.
+                </small>
+              </div>
+
+              <div class="field grid__span--2">
+                <label for="estadoCivil" class="label">Estado civil</label>
+                <input id="estadoCivil" class="input" formControlName="estadoCivil" />
+              </div>
+          </div>
+        </div>
+      </div>
+
+      
+    </section>
+    <section class="section">
+      <h2 class="section__title">Datos de contacto</h2>
+      <div class="grid grid--2" formGroupName="datosContacto">
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <input id="email" class="input" formControlName="email" />
+          <small class="error"
+            *ngIf="usuarioForm.get('datosContacto.email')?.hasError('email') && usuarioForm.get('datosContacto.email')?.touched">
+            Formato de email inválido.
+          </small>
+          <small class="error" *ngIf="usuarioForm.get('datosContacto.email')?.hasError('emailExiste')">
+            Este email ya está registrado.
+          </small>
+        </div>
+
+        <div class="field">
+          <label class="label" for="telefono">Teléfono</label>
+          <input id="telefono" class="input" formControlName="telefono" />
+          <small class="error"
+            *ngIf="usuarioForm.get('datosContacto.telefono')?.hasError('telefonoInvalido') && usuarioForm.get('datosContacto.telefono')?.touched">
+            El teléfono debe tener 9 dígitos.
+          </small>
+        </div>
+
+        <div class="field grid__span--2">
+          <label class="label" for="direccion">Dirección</label>
+          <input id="direccion" class="input" formControlName="direccion" />
+        </div>
+
+        <div class="field">
+          <label class="label" for="ciudad">Ciudad</label>
+          <input id="ciudad" class="input" formControlName="ciudad" />
+        </div>
+
+        <div class="field">
+          <label class="label" for="cp">Código postal</label>
+          <input id="cp" class="input" formControlName="codigoPostal" />
+        </div>
+
+        <div class="field grid__span--2">
+          <label class="label" for="pais">País</label>
+          <input id="pais" class="input" formControlName="pais" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__header">
+        <h2 class="section__title">Formación académica</h2>
+        <button type="button" class="btn btn--outline" (click)="agregarAcademico()">Añadir estudios</button>
+      </div>
+
+      <div formArrayName="datosAcademicos" class="stack">
+        <div class="card" *ngFor="let academico of datosAcademicos.controls; let i = index" [formGroupName]="i">
+          <div class="card__header">
+            <h3 class="card__title">Estudio #{{ i + 1 }}</h3>
+            <button type="button" class="btn btn--link" (click)="datosAcademicos.removeAt(i)">Eliminar</button>
+          </div>
+
+          <div class="grid grid--2">
+            <div class="field">
+              <label class="label" for="nivel-{{ i }}">Nivel de estudios</label>
+              <input id="nivel-{{ i }}" class="input" formControlName="nivelEstudios" />
+              <small class="error"
+                *ngIf="academico.get('nivelEstudios')?.invalid && academico.get('nivelEstudios')?.touched">
+                Campo obligatorio.
+              </small>
+            </div>
+
+            <div class="field">
+              <label class="label" for="inst-{{ i }}">Institución</label>
+              <input id="inst-{{ i }}" class="input" formControlName="institucion" />
+              <small class="error"
+                *ngIf="academico.get('institucion')?.invalid && academico.get('institucion')?.touched">
+                Campo obligatorio.
+              </small>
+            </div>
+
+            <div class="field">
+              <label class="label" for="anio-{{ i }}">Año de graduación</label>
+              <input id="anio-{{ i }}" type="number" class="input" formControlName="anioGraduacion" />
+              <small class="error"
+                *ngIf="academico.get('anioGraduacion')?.hasError('anioInvalido') && academico.get('anioGraduacion')?.touched">
+                El año de graduación no es válido.
+              </small>
+            </div>
+
+            <div class="field">
+              <label class="label" for="carrera-{{ i }}">Carrera</label>
+              <input id="carrera-{{ i }}" class="input" formControlName="carrera" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__header">
+        <h2 class="section__title">Experiencia laboral</h2>
+        <button type="button" class="btn btn--outline" (click)="agregarLaboral()">Añadir experiencia</button>
+      </div>
+
+      <div formArrayName="datosLaborales" class="stack">
+        <div class="card" *ngFor="let laboral of datosLaborales.controls; let i = index" [formGroupName]="i">
+          <div class="card__header">
+            <h3 class="card__title">Puesto #{{ i + 1 }}</h3>
+            <button type="button" class="btn btn--link" (click)="datosLaborales.removeAt(i)">Eliminar</button>
+          </div>
+
+          <div class="grid grid--2">
+            <div class="field">
+              <label class="label" for="ocupacion-{{ i }}">Ocupación</label>
+              <input id="ocupacion-{{ i }}" class="input" formControlName="ocupacion" />
+              <small class="error" *ngIf="laboral.get('ocupacion')?.invalid && laboral.get('ocupacion')?.touched">
+                La ocupación es obligatoria.
+              </small>
+            </div>
+
+            <div class="field">
+              <label class="label" for="empresa-{{ i }}">Empresa</label>
+              <input id="empresa-{{ i }}" class="input" formControlName="empresa" />
+            </div>
+
+            <div class="field">
+              <label class="label" for="puesto-{{ i }}">Puesto</label>
+              <input id="puesto-{{ i }}" class="input" formControlName="puesto" />
+            </div>
+
+            <div class="field">
+              <label class="label" for="exp-{{ i }}">Experiencia (años)</label>
+              <input id="exp-{{ i }}" type="number" class="input" formControlName="experienciaLaboralAnios" />
+              <small class="error"
+                *ngIf="laboral.get('experienciaLaboralAnios')?.hasError('min') && laboral.get('experienciaLaboralAnios')?.touched">
+                Debe ser 0 o mayor.
+              </small>
+            </div>
+
+            <div class="field grid__span--2">
+              <label class="label" for="salario-{{ i }}">Salario mensual</label>
+              <input id="salario-{{ i }}" type="number" class="input" formControlName="salarioMensual" />
+              <small class="error"
+                *ngIf="laboral.get('salarioMensual')?.hasError('min') && laboral.get('salarioMensual')?.touched">
+                Debe ser 0 o mayor.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="form__footer">
+      <button type="submit" class="btn btn--primary">Enviar</button>
+      <button type="reset" class="btn btn--ghost">Limpiar</button>
+    </footer>
+  </form>
+
 </div>

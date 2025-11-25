@@ -12,9 +12,14 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class ReferenciasComponent {
   protected readonly referenciasUrl: Array<string> = [
+    'https://v19.angular.dev/overview',
     'https://angular.dev/guide/di/defining-dependency-providers',
     'https://www.paradigmadigital.com/dev/patron-contenedor-presentadores-aplicado-desarrollo-angular/',
-    'https://www.linkedin.com/pulse/angular-vs-react-data-binding-explained-muhammed-akil-lcoqf/'
+    'https://www.linkedin.com/pulse/angular-vs-react-data-binding-explained-muhammed-akil-lcoqf/',
+    'https://www.youtube.com/watch?v=2Up1ulUn5NE',
+    'https://careers.edicomgroup.com/techblog/marble-diagrams-for-testing-rxjs-operators/',
+    'https://rxjsmarbles.dev/combineLatest',
+    'https://konstantin-denerz.com/quickstart-angular-19-testing-with-jest-and-neovim/'
   ];
 
   constructor(private sanitizer: DomSanitizer) {}

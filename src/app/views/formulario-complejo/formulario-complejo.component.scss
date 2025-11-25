@@ -1,4 +1,18 @@
 .form-container {
+  /* Variables */
+  $color-bg: #f7f7fa;
+  $color-card: #ffffff;
+  $color-text: #1f2937;
+  $color-muted: #6b7280;
+  $color-border: #e5e7eb;
+  $color-primary: #2563eb;
+  $color-primary-hover: #1d4ed8;
+  $color-error: #dc2626;
+  $radius: 10px;
+  $radius-sm: 8px;
+  $shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  $spacing: 16px;
+
   h1 {
     margin-top: 0;
     color: #2c3e50;
@@ -7,9 +21,228 @@
     border-bottom: 0.125rem solid #3498db;
     padding-bottom: 0.5rem;
   }
+
   p {
     color: #7f8c8d;
     font-size: 1.1rem;
   }
-}
 
+  /* usuario-formulario.component.scss */
+
+
+
+  /* Mixins */
+  @mixin focus-ring($color: $color-primary) {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($color, 0.25);
+  }
+
+  /* Layout base */
+  .form {
+    max-width: 1100px;
+    padding: 0 24px;
+    background: $color-bg;
+    border-radius: $radius;
+    color: $color-text;
+
+    &__header {
+      margin-bottom: 16px;
+    }
+
+    &__title {
+      margin: 0 0 6px 0;
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
+
+    &__subtitle {
+      margin: 0;
+      color: $color-muted;
+      font-size: 0.95rem;
+    }
+
+    &__footer {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+  }
+
+  /* Secciones */
+  .section {
+    background: $color-card;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    padding: 16px;
+    margin: 20px 0;
+
+    &__title {
+      margin: 0 0 12px 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+  }
+
+  /* Grid utilitaria */
+  .grid {
+    display: grid;
+    gap: $spacing;
+
+    &--2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .grid__span--2 {
+    grid-column: span 2;
+  }
+
+  /* Pila vertical */
+  .stack {
+    display: grid;
+    gap: $spacing;
+  }
+
+  /* Tarjetas para arrays dinámicos */
+  .card {
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    background: $color-card;
+    padding: 16px;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    &__title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+  }
+
+  /* Campos */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .label {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .input {
+      border: 1px solid $color-border;
+      border-radius: $radius-sm;
+      background: #fff;
+      padding: 10px 12px;
+      font-size: 0.95rem;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+      &:focus {
+        border-color: $color-primary;
+        @include focus-ring();
+      }
+
+      &--select {
+        padding-right: 32px;
+      }
+
+      /* Estados invalid/touched */
+      &.ng-invalid.ng-touched {
+        border-color: $color-error;
+        box-shadow: 0 0 0 2px rgba($color-error, 0.12);
+      }
+    }
+
+    .error {
+      color: $color-error;
+      font-size: 0.85rem;
+    }
+  }
+
+  /* Botones */
+  .btn {
+    border: 1px solid transparent;
+    border-radius: $radius-sm;
+    padding: 10px 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+    &--primary {
+      background: $color-primary;
+      color: #fff;
+
+      &:hover {
+        background: $color-primary-hover;
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+
+    &--outline {
+      background: transparent;
+      border-color: $color-border;
+      color: $color-text;
+
+      &:hover {
+        border-color: $color-primary;
+        color: $color-primary;
+      }
+    }
+
+    &--ghost {
+      background: transparent;
+      color: $color-muted;
+
+      &:hover {
+        color: $color-text;
+      }
+    }
+
+    &--link {
+      background: transparent;
+      border: none;
+      color: $color-primary;
+      padding: 6px 8px;
+
+      &:hover {
+        color: $color-primary-hover;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  /* Responsivo */
+  @media (max-width: 860px) {
+    .grid--2 {
+      grid-template-columns: 1fr;
+    }
+
+    .grid__span--2 {
+      grid-column: span 1;
+    }
+
+    .form {
+      padding: 16px;
+      margin: 16px auto;
+    }
+  }
+
+}
