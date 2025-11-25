@@ -1,4 +1,102 @@
 <div class="reactividad-rxjs-container">
   <h1>Reactividad RXJS</h1>
-  <p>Aquí irá la sección de Reactividad RXJS.</p>
+
+  <p><strong>Importante: </strong> Desuscribirse de las subscripciones para evitar fugas de memoria. Se puede hacer
+    en el ciclo de vida onDestroy, con asyncPipe, con take(1)** , con takeUntilDestroyed</p>
+
+  <div class="grid">
+    <section class="card">
+      <h3>Cuenta ascendente</h3>
+      <div class="numero-latest" aria-live="polite">{{ numeros$ | async }}</div>
+      <p class="hint">(emisión cada 500ms, filtra pares)</p>
+    </section>
+
+    <section class="card">
+      <h3>Eventos (debounce 250ms)</h3>
+      <div class="controls">
+        <button class="btn" (click)="simulateEvent()">Simular evento</button>
+        <span> Llevas {{ clickCount() }} clicks</span>
+        <button (click)="reset()">reset</button>
+      </div>
+      <ul class="events-list">
+        <li *ngFor="let e of eventosHistory$ | async; let i = index">
+          <span class="index">#{{ i + 1 }}</span>
+          <span class="value">{{ e }}</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <hr class="section-divider" />
+
+  <h2>combineLatest</h2>
+  <p class="section-desc">Emite cuando cualquiera de los observables cambia, con el último valor de cada uno</p>
+
+  <div class="grid">
+    <section class="card_2">
+      <h3>Valor 1</h3>
+      <div class="numero-latest">{{ valor1$ | async }}</div>
+      <div class="controls">
+        <button class="btn" (click)="incrementarValor1()">+5</button>
+        <button class="btn" (click)="decrementarValor1()">-5</button>
+      </div>
+    </section>
+
+    <section class="card_2">
+      <h3>Valor 2</h3>
+      <div class="numero-latest">{{ valor2$ | async }}</div>
+      <div class="controls">
+        <button class="btn" (click)="incrementarValor2()">+5</button>
+        <button class="btn" (click)="decrementarValor2()">-5</button>
+      </div>
+    </section>
+
+    <section class="card_2">
+      <h3>Resultado combinado</h3>
+      <div *ngIf="combinado$ | async as combo" class="combo-result">
+        <div class="combo-line">
+          <span class="label">V1:</span> <span class="value">{{ combo.v1 }}</span>
+        </div>
+        <div class="combo-line">
+          <span class="label">V2:</span> <span class="value">{{ combo.v2 }}</span>
+        </div>
+        <div class="combo-line">
+          <span class="label">Suma:</span> <span class="value highlight">{{ combo.suma }}</span>
+        </div>
+        <div class="combo-line">
+          <span class="label">Producto:</span> <span class="value highlight">{{ combo.producto }}</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <hr class="section-divider" />
+
+  <h2>switchMap</h2>
+  <p class="section-desc">Cambia dinámicamente el observable según la selección, cancelando el anterior</p>
+
+  <div class="grid">
+    <section class="card">
+      <h3>Cambiar tipo</h3>
+      <div class="controls">
+        <button [class.active]="(seleccionado$ | async) === 'pares'" class="btn" (click)="cambiarTipo('pares')">
+          Números pares
+        </button>
+        <button [class.active]="(seleccionado$ | async) === 'impares'" class="btn" (click)="cambiarTipo('impares')">
+          Números impares
+        </button>
+      </div>
+      <p class="hint">Tipo actual: {{ seleccionado$ | async }}</p>
+    </section>
+
+    <section class="card">
+      <h3>Últimos valores emitidos</h3>
+      <ul class="events-list">
+        <li *ngFor="let item of switchMapHistory$ | async">
+          <span class="index">{{ item.tipo[0] | uppercase }}</span>
+          <span class="value">{{ item.numero }}</span>
+        </li>
+      </ul>
+    </section>
+  </div>
 </div>

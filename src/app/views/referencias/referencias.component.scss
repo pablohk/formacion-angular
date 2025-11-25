@@ -1,4 +1,4 @@
-.referencia-container {
+.referencias-container {
   h1 {
     margin-top: 0;
     color: #2c3e50;
@@ -7,9 +7,31 @@
     border-bottom: 0.125rem solid #3498db;
     padding-bottom: 0.5rem;
   }
+
   .reference-list {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .item {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.5rem;
+    align-items: center;
+
+    &::before {
+      content: '•';
+      font-weight: bold;
+      margin-right: 0.5rem;
+      color: #3498db;
+    }
+
+    p {
+      margin: 0;
+    }
   }
 }

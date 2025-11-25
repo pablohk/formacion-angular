@@ -2,13 +2,11 @@
   .layout {
     display: flex;
     height: 100vh;
-    overflow: hidden;
   }
 
   // Main Content Area
   .main-content {
     flex: 1;
-    overflow-y: auto;
     background-color: #f5f6fa;
     padding: 1rem;
   }
@@ -19,7 +17,8 @@
     border-bottom: 1px solid #e6e9ef;
     padding: 0.5rem 1rem;
     box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-
+    position: sticky;
+    top: 0;
     .top-menu-inner {
       display: flex;
       align-items: center;

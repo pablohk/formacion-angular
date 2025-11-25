@@ -1,4 +1,4 @@
-<div class="referencia-container">
+<div class="referencias-container">
   <h1>Referencias</h1>
   <ul class="reference-list">
     @for (item of referenciasUrl; track item) {
@@ -12,7 +12,8 @@
 </div>
 
 <ng-template #refItem let-item="item">
-  <li>
-    <a [href]="getSafeUrl(item)" target="_blank" rel="noopener noreferrer">{{ item }}</a>
+  <li class="item">
+    <p>{{item.titulo | bracketsPipe }}</p>
+    <a [href]="getSafeUrl(item.url)" target="_blank" rel="noopener noreferrer">{{ item.url }}</a>
   </li>
 </ng-template>

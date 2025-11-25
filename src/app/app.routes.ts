@@ -69,6 +69,13 @@ export const routes: Routes = [
         (m) => m.ReactividadRxjsComponent
       ),
   },
+  {
+    path: 'peticiones-api',
+    loadComponent: () =>
+      import('./views/peticiones-api/peticiones-api.component').then(
+        (m) => m.PeticionesApiComponent
+      ),
+  },
    {
     path: 'carga-diferida',
     loadComponent: () =>
@@ -77,7 +84,7 @@ export const routes: Routes = [
       ),
   },
   {
-    path: '',
+    path: '**',
     redirectTo: '/home',
     pathMatch: 'full',
   },

@@ -17,36 +17,31 @@ export const COURSE_TOPICS: Array<ITopic> = [
     completed: false,
   },
   {
-    id: '10',
+    id: '2',
     title: 'Lazy loading',
     completed: false,
   },
   {
-    id: '2',
+    id: '3',
     title: 'Pipes',
     completed: false,
   },
   {
-    id: '3',
+    id: '4',
     title: 'Optimización de desarrollo componentes',
     subtitle:
       'Flujo de información entre padres-hijos sin llegar al prop drilling',
     completed: false,
   },
   {
-    id: '4',
+    id: '5',
     title: 'Gestores de estado global',
     subtitle: 'Como nanostores o zustand y su integración con Angular',
     completed: false,
   },
   {
-    id: '5',
-    title: 'Reactividad RXJS',
-    completed: false,
-  },
-  {
     id: '6',
-    title: 'Gestión de peticiones a APIs con HttpClient de Angular',
+    title: 'Reactividad RXJS',
     completed: false,
   },
   {
@@ -58,10 +53,9 @@ export const COURSE_TOPICS: Array<ITopic> = [
     ],
     completed: false,
   },
-
   {
     id: '8',
-    title: 'Interfaces o tipos complejos en TypeScript orientados a Angular',
+    title: 'Gestión de peticiones a APIs con HttpClient de Angular',
     completed: false,
   },
   {
@@ -70,7 +64,11 @@ export const COURSE_TOPICS: Array<ITopic> = [
     subtitle: '(Desconozco si Angular trae esto de manera nativa)',
     completed: false,
   },
-
+  {
+    id: '10',
+    title: 'Interfaces o tipos complejos en TypeScript orientados a Angular',
+    completed: false,
+  },
   {
     id: '11',
     title: 'Unit testing',
