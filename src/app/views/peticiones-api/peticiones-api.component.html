@@ -1,0 +1,88 @@
+<div class="peticiones-api-container">
+  <h1>Peticiones HTTP con HttpClient</h1>
+  <p class="intro">Ejemplos de peticiones GET, POST, PUT y DELETE con Angular HttpClient</p>
+
+  <div class="grid">
+    <!-- Panel de Controles -->
+    <section class="card control-panel">
+      <h2>Panel de Control</h2>
+
+      <div class="control-group">
+        <label>ID del Post:</label>
+        <div class="input-group">
+          <input type="number" [(ngModel)]="postId" min="1" max="100" />
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-primary" (click)="fetchPost(postId)" [disabled]="loading$ | async">
+          {{ (loading$ | async) ? 'Cargando...' : 'GET Post por ID' }}
+        </button>
+        <button class="btn btn-secondary" (click)="fetchAllPosts()" [disabled]="loading$ | async">
+          {{ (loading$ | async) ? 'Cargando...' : 'GET Todos los Posts' }}
+        </button>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-success" (click)="createPost()" [disabled]="loading$ | async">
+          {{ (loading$ | async) ? 'Creando...' : 'POST Crear' }}
+        </button>
+        <button class="btn btn-warning" (click)="updatePost(postId)" [disabled]="loading$ | async">
+          {{ (loading$ | async) ? 'Actualizando...' : 'PUT Actualizar' }}
+        </button>
+        <button class="btn btn-danger" (click)="deletePost(postId)" [disabled]="loading$ | async">
+          {{ (loading$ | async) ? 'Eliminando...' : 'DELETE Eliminar' }}
+        </button>
+      </div>
+    </section>
+
+    <!-- Panel de Respuesta -->
+    <section class="card response-panel">
+      <h2>Respuesta</h2>
+
+      <div *ngIf="error$ | async as error" class="alert alert-error">
+        <strong>Error:</strong> {{ error }}
+      </div>
+
+      <div *ngIf="loading$ | async" class="alert alert-info">
+        Cargando datos...
+      </div>
+
+      <div *ngIf="(data$ | async) as data" class="data-display">
+        <pre>{{ data | json }}</pre>
+      </div>
+
+      <div *ngIf="!(loading$ | async) && !(data$ | async) && !(error$ | async)" class="hint">
+        Selecciona un ID y realiza una petición
+      </div>
+    </section>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- Log de Peticiones -->
+  <section class="card">
+    <div class="log-header">
+      <h2>Log de Peticiones</h2>
+      <button class="btn btn-small" (click)="clearLogs()">Limpiar</button>
+    </div>
+
+    <div *ngIf="(requestLogs$ | async)?.length === 0" class="hint">
+      Sin peticiones realizadas
+    </div>
+
+    <div *ngIf="(requestLogs$ | async) as logs" class="logs-list">
+      <div *ngFor="let log of logs" class="log-entry" [ngClass]="getStatusClass(log.status)">
+        <div class="log-row">
+          <span class="method" [ngClass]="'method-' + log.method">{{ log.method }}</span>
+          <span class="time">{{ log.timestamp | date:'HH:mm:ss.SSS' }}</span>
+        </div>
+        <div class="log-url">{{ log.url }}</div>
+        <div class="log-status">
+          <span *ngIf="log.status === 'success'" class="badge-success">✓ Éxito</span>
+          <span *ngIf="log.status === 'error'" class="badge-error">✗ Error: {{ log.error }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
