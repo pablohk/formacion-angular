@@ -2,6 +2,11 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'trazas-errores',
+    loadComponent: () =>
+      import('./views/trazas-errores/trazas-errores.component').then((m) => m.TrazasErroresComponent),
+  },
+  {
     path: 'home',
     loadComponent: () =>
       import('./views/home/home.component').then((m) => m.HomeComponent),

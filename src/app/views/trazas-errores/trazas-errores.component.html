@@ -1,0 +1,41 @@
+<div class="trazas-errores-container">
+  <h1>Simulador de Errores</h1>
+
+
+
+  <div class="buttons-section">
+    <div class="button-group">
+      <h2>Consola</h2>
+      <button (click)="testErrorNull()" class="btn btn-warning">Null</button>
+      <button (click)="testErrorThrow()" class="btn btn-warning">Throw</button>
+      <button (click)="testErrorThrowTimeout()" class="btn btn-warning">Throw Timeout</button>
+      <button (click)="testErrorZoneless()" #zoneless class="btn btn-warning">Zoneless Null</button>
+      <button (click)="testErrorPromise()" class="btn btn-warning">Promise</button>
+      <button (click)="testErrorZonelessPromise()" class="btn btn-warning">Zoneless Promise</button>
+    </div>
+    <div class="button-group">
+      <h2>GET Requests</h2>
+      <button (click)="testGet200()" class="btn btn-success">GET 200</button>
+      <button (click)="testGet400()" class="btn btn-danger">GET 400</button>
+      <button (click)="testGet400_v1()" class="btn btn-danger">GET 400 V1</button>
+      <button (click)="testGet401()" class="btn btn-danger">GET 401</button>
+      <button (click)="testGet403()" class="btn btn-danger">GET 403</button>
+      <button (click)="testGet404()" class="btn btn-danger">GET 404</button>
+      <button (click)="testGet500()" class="btn btn-danger">GET 500</button>
+    </div>
+
+    <div class="button-group">
+      <h2>POST Requests</h2>
+      <button (click)="testPost200()" class="btn btn-success">POST 200</button>
+      <button (click)="testPost400()" class="btn btn-danger">POST 400</button>
+      <button (click)="testPost401()" class="btn btn-danger">POST 401</button>
+      <button (click)="testPost403()" class="btn btn-danger">POST 403</button>
+      <button (click)="testPost404()" class="btn btn-danger">POST 404</button>
+      <button (click)="testPost500()" class="btn btn-danger">POST 500</button>
+    </div>
+  </div>
+
+  <div *ngIf="lastError()" class="error-details">
+    <pre>{{ lastError() | json }}</pre>
+  </div>
+</div>
