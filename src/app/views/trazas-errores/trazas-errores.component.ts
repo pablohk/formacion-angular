@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpErrorSimulatorService } from '../../shared/services/http-error-simulator.service';
-import { LogSeverity, LogsService } from '../../shared/services/logs.service';
+import { LogSeverity, LogsService, OriginError } from '../../shared/services/logs.service';
 
 @Component({
   selector: 'app-trazas-errores',
@@ -29,28 +29,32 @@ export class TrazasErroresComponent implements OnInit {
     console.log('TrazasErroresComponent initialized');
     this.logsService.handleLogError(
       'ngOnInit success',
-      'manual',
+      OriginError.MANUAL,
       LogSeverity.LOG
     );
     console.error('ñññññññññññññññññññ');
   }
 
   testErrorNull(): void {
+    console.clear();
     const a: any = [];
     console.log(a[1].prop);
   }
 
   testErrorThrow(): void {
+    console.clear();
     throw new Error('testErrorThrow');
   }
 
   testErrorThrowTimeout(): void {
+    console.clear();
     setTimeout(() => {
       throw new Error('testErrorThrowTimeout');
     }, 100);
   }
 
   testErrorZoneless(): void {
+    console.clear();
     this.zone.runOutsideAngular(() => {
       setTimeout(() => {
         const a: any = [];
@@ -60,12 +64,14 @@ export class TrazasErroresComponent implements OnInit {
   }
 
   testErrorPromise(): void {
+    console.clear();
     new Promise(() => {
       throw new Error('Error dentro de Promise');
     });
   }
 
   testErrorZonelessPromise(): void {
+    console.clear();
     this.zone.runOutsideAngular(() => {
       new Promise(() => {
         throw new Error('Error dentro de Promise');
@@ -75,6 +81,7 @@ export class TrazasErroresComponent implements OnInit {
 
   // GET Requests
   testGet200(): void {
+    console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.getSuccess(),
       'GET 200'
@@ -82,16 +89,19 @@ export class TrazasErroresComponent implements OnInit {
   }
 
   testGet400(): void {
+    console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.getError400(),
       'GET 400'
     );
   }
  testGet400_v1(): void {
+    console.clear();
     this.errorSimulatorService.getError400().subscribe();
   }
 
   testGet401(): void {
+    console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.getError401(),
       'GET 401'
@@ -99,6 +109,7 @@ export class TrazasErroresComponent implements OnInit {
   }
 
   testGet403(): void {
+    console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.getError403(),
       'GET 403'
@@ -106,6 +117,7 @@ export class TrazasErroresComponent implements OnInit {
   }
 
   testGet404(): void {
+    console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.getError404(),
       'GET 404'
@@ -113,6 +125,7 @@ export class TrazasErroresComponent implements OnInit {
   }
 
   testGet500(): void {
+    console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.getError500(),
       'GET 500'
@@ -121,6 +134,7 @@ export class TrazasErroresComponent implements OnInit {
 
   // POST Requests
   testPost200(): void {
+    console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.postSuccess(),
       'POST 200'
@@ -128,6 +142,7 @@ export class TrazasErroresComponent implements OnInit {
   }
 
   testPost400(): void {
+    console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.postError400(),
       'POST 400'
@@ -135,6 +150,7 @@ export class TrazasErroresComponent implements OnInit {
   }
 
   testPost401(): void {
+    console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.postError401(),
       'POST 401'
@@ -142,6 +158,7 @@ export class TrazasErroresComponent implements OnInit {
   }
 
   testPost403(): void {
+    console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.postError403(),
       'POST 403'
@@ -149,6 +166,7 @@ export class TrazasErroresComponent implements OnInit {
   }
 
   testPost404(): void {
+    console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.postError404(),
       'POST 404'
@@ -156,6 +174,7 @@ export class TrazasErroresComponent implements OnInit {
   }
 
   testPost500(): void {
+    console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.postError500(),
       'POST 500'
@@ -171,7 +190,7 @@ export class TrazasErroresComponent implements OnInit {
       },
       error: (error: any) => {
         this.lastError.set(error);
-        console.error('--- executeRequest Error:', error);
+        console.log('--- executeRequest Error:', error);
       },
     });
   }

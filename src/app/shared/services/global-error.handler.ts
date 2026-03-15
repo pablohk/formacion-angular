@@ -1,6 +1,6 @@
 import { ErrorHandler, inject, Injectable, NgZone } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { LogsService } from './logs.service';
+import { LogsService, OriginError } from './logs.service';
 import { last } from 'rxjs';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class GlobalErrorHandler implements ErrorHandler {
     console.log('--- GLOBAL ERROR HANDLER ---');
     (error as any).__fromGlobalError = true;
     if (!(error as any)?.__fromInterceptor) {
-      this.logsService.handleLogError(error, 'GlobalErrorHandler');
+      this.logsService.handleLogError(error, OriginError.GLOBAL_ERROR_HANDLER);
     }
   }
 
@@ -28,7 +28,7 @@ export class GlobalErrorHandler implements ErrorHandler {
       window.addEventListener('error', (event: ErrorEvent) => {
         console.log('--- LISTENER ERROR EVENT ---');
         (event?.error as any).__fromListener = true;
-        this.logsService.handleLogError(event?.error, 'eventListener-error');
+        this.logsService.handleLogError(event?.error, OriginError.EVENT_LISTENER_ERROR);
       });
 
       // Promise rejections no manejadas
@@ -37,7 +37,7 @@ export class GlobalErrorHandler implements ErrorHandler {
         (event: PromiseRejectionEvent) => {
           console.log('--- LISTENER UNHANDLED EVENT ---');
           (event?.reason as any).__fromListener = true;
-          this.logsService.handleLogError(event?.reason, 'eventListener-error');
+          this.logsService.handleLogError(event?.reason, OriginError.EVENT_LISTENER_UNHANDLED_REJECTION);
         }
       );
     });
@@ -54,11 +54,11 @@ export class GlobalErrorHandler implements ErrorHandler {
           !lastArg?.payload?.__fromInterceptor &&
           !lastArg?.payload?.__fromGlobalError &&
           !lastArg?.payload?.__fromListener &&
-          lastArg?.originError !== 'console-error';
+          lastArg?.originError !== OriginError.CONSOLE_ERROR;
 
         if (notFired || (notFired && isErrorInstance)) {
           console.info('--- CONSOLA EVENT ---');
-          this.logsService.handleLogError(lastArg, 'console-error');
+          this.logsService.handleLogError(lastArg, OriginError.CONSOLE_ERROR);
         }
       };
     } catch (error) {

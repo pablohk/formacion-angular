@@ -8,6 +8,15 @@ export enum LogSeverity {
   DEBUG = 'debug',
 }
 
+export enum OriginError {
+  GLOBAL_ERROR_HANDLER,
+  HTTP_INTERCEPTOR,
+  EVENT_LISTENER_ERROR,
+  EVENT_LISTENER_UNHANDLED_REJECTION,
+  MANUAL,
+  CONSOLE_ERROR,
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -18,15 +27,15 @@ export class LogsService {
   /** publcamos metodos para el log, error, warn, info, debug */
   public handleLogError(
     payload: any,
-    originError: any,
+    originError: OriginError,
     severity: LogSeverity = LogSeverity.ERROR
   ): void {
     const loggerPayload = this.generateMessage(payload, originError);
-    console[severity]('<<<< ENVIANDO TRAZA AL BM-LOGGER ---', loggerPayload);
-    console.log('---', payload?.__fromGlobalError, payload?.__fromInterceptor, originError);  
+    console.warn(`<<<< ENVIANDO TRAZA AL BM-LOGGER [${OriginError[originError]}] [${severity}]---`, loggerPayload);
+    console.log('---fromGlobalError', payload?.__fromGlobalError, 'fromInterceptor', payload?.__fromInterceptor);  
 }
 
-  private generateMessage(payload: any, originError: any): any {
+  private generateMessage(payload: any, originError: OriginError): any {
     return {
       timestamp: new Date(),
       originError,
