@@ -1,8 +1,7 @@
-import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 import { inject } from '@angular/core';
-import { LogsService, OriginError } from './logs.service';
+import { LogSeverity, LogsService, OriginError } from './logs.service';
 
 export const httpErrorInterceptor: HttpInterceptorFn = (req, next) => {
   const logsService = inject(LogsService);
@@ -10,13 +9,12 @@ export const httpErrorInterceptor: HttpInterceptorFn = (req, next) => {
     tap({
       error: (error: any) => {
         console.log('--- HTTP ERROR INTERCEPTOR TAP ---');
-        (error as any).__fromInterceptor = true;
-        logsService.handleLogError(error, OriginError.HTTP_INTERCEPTOR);
+        logsService.handleLogError({
+          payload: error,
+          originError: OriginError.$BM_HTTP_INTERCEPTOR,
+          severity: LogSeverity.ERROR,
+        });
       },
-    })
-    // catchError((error: HttpErrorResponse) => {
-    //   console.log('--- HTTP ERROR INTERCEPTOR ---');
-    //   return throwError(() => error);
-    // })
+    }),
   );
 };

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, switchMap, throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpErrorSimulatorService {
   private baseUrl = 'https://httpbin.org/status';
@@ -60,29 +60,14 @@ export class HttpErrorSimulatorService {
     return this.http.post(`${this.baseUrl}/500`, { test: 'data' });
   }
 
-  // Generic method to simulate any HTTP status code
-  simulateStatusCode(statusCode: number, method: 'GET' | 'POST' = 'GET'): Observable<any> {
-    const url = `${this.baseUrl}/${statusCode}`;
-
-    if (method === 'POST') {
-      return this.http.post(url, { test: 'data' });
-    } else {
-      return this.http.get(url);
-    }
-  }
-
-  // Simulate with delay (in milliseconds)
-  simulateStatusCodeWithDelay(
-    statusCode: number,
-    method: 'GET' | 'POST' = 'GET',
-    delayMs: number = 1000
-  ): Observable<any> {
-    const url = `${this.baseUrl}/${statusCode}?sleep=${delayMs}`;
-
-    if (method === 'POST') {
-      return this.http.post(url, { test: 'data' });
-    } else {
-      return this.http.get(url);
-    }
+  getError400RXJS(flag=false): Observable<any> {
+    return this.http
+      .get(`${this.baseUrl}/400`)
+      .pipe(
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => throwError(() => flag ? 'cusmonError' : error))
+      );
   }
 }

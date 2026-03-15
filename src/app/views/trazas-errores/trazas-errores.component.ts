@@ -9,7 +9,11 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpErrorSimulatorService } from '../../shared/services/http-error-simulator.service';
-import { LogSeverity, LogsService, OriginError } from '../../shared/services/logs.service';
+import {
+  LogSeverity,
+  LogsService,
+  OriginError,
+} from '../../shared/services/logs.service';
 
 @Component({
   selector: 'app-trazas-errores',
@@ -27,12 +31,12 @@ export class TrazasErroresComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('TrazasErroresComponent initialized');
-    this.logsService.handleLogError(
-      'ngOnInit success',
-      OriginError.MANUAL,
-      LogSeverity.LOG
-    );
-    console.error('ñññññññññññññññññññ');
+    this.logsService.handleLogError({
+      payload: 'ngOnInit success',
+      severity: LogSeverity.LOG,
+      originError: OriginError.$BM_MANUALLY_ERROR,
+    });
+    console.error('ñññññññññññññññññññ','5555','6666');
   }
 
   testErrorNull(): void {
@@ -84,7 +88,7 @@ export class TrazasErroresComponent implements OnInit {
     console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.getSuccess(),
-      'GET 200'
+      'GET 200',
     );
   }
 
@@ -92,19 +96,30 @@ export class TrazasErroresComponent implements OnInit {
     console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.getError400(),
-      'GET 400'
+      'GET 400',
     );
   }
- testGet400_v1(): void {
+
+  testGet400_v1(): void {
     console.clear();
     this.errorSimulatorService.getError400().subscribe();
+  }
+
+  testGet400RXJS(): void {
+    console.clear();
+    this.errorSimulatorService.getError400RXJS().subscribe();
+  }
+
+  testGet400RXJS_v1(): void {
+    console.clear(); 
+     this.errorSimulatorService.getError400RXJS(true).subscribe();
   }
 
   testGet401(): void {
     console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.getError401(),
-      'GET 401'
+      'GET 401',
     );
   }
 
@@ -112,7 +127,7 @@ export class TrazasErroresComponent implements OnInit {
     console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.getError403(),
-      'GET 403'
+      'GET 403',
     );
   }
 
@@ -120,7 +135,7 @@ export class TrazasErroresComponent implements OnInit {
     console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.getError404(),
-      'GET 404'
+      'GET 404',
     );
   }
 
@@ -128,7 +143,7 @@ export class TrazasErroresComponent implements OnInit {
     console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.getError500(),
-      'GET 500'
+      'GET 500',
     );
   }
 
@@ -137,7 +152,7 @@ export class TrazasErroresComponent implements OnInit {
     console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.postSuccess(),
-      'POST 200'
+      'POST 200',
     );
   }
 
@@ -145,7 +160,7 @@ export class TrazasErroresComponent implements OnInit {
     console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.postError400(),
-      'POST 400'
+      'POST 400',
     );
   }
 
@@ -153,7 +168,7 @@ export class TrazasErroresComponent implements OnInit {
     console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.postError401(),
-      'POST 401'
+      'POST 401',
     );
   }
 
@@ -161,7 +176,7 @@ export class TrazasErroresComponent implements OnInit {
     console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.postError403(),
-      'POST 403'
+      'POST 403',
     );
   }
 
@@ -169,7 +184,7 @@ export class TrazasErroresComponent implements OnInit {
     console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.postError404(),
-      'POST 404'
+      'POST 404',
     );
   }
 
@@ -177,13 +192,12 @@ export class TrazasErroresComponent implements OnInit {
     console.clear();
     this.executeRequest(
       () => this.errorSimulatorService.postError500(),
-      'POST 500'
+      'POST 500',
     );
   }
 
   private executeRequest(request: () => any, label: string): void {
     this.lastError.set(null);
-
     request().subscribe({
       next: (response: any) => {
         console.log('--- executeRequest Response:', response);
