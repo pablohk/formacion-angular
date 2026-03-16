@@ -16,7 +16,7 @@ export enum LogSeverity {
 }
 
 export enum OriginError {
-  $$BM_GLOBAL_ERROR_HANDLER = '$$BM_GLOBAL_ERROR_HANDLER',
+  $BM_GLOBAL_ERROR_HANDLER = '$BM_GLOBAL_ERROR_HANDLER',
   $BM_HTTP_INTERCEPTOR = '$BM_HTTP_INTERCEPTOR',
   $BM_EVENT_LISTENER_ERROR = '$BM_EVENT_LISTENER_ERROR',
   $BM_EVENT_LISTENER_UNHANDLED_REJECTION = '$BM_EVENT_LISTENER_UNHANDLED_REJECTION',
@@ -36,14 +36,14 @@ export class LogsService {
   public handleLogError(errorObj: ERROR_OBJECT): void {
     const loggerPayload = this.generateErrorObject(errorObj);
     this.propagateErrorToConsole(errorObj);
-    // console.warn(
-    //   `<<<< ENVIANDO TRAZA AL BM-LOGGER [${loggerPayload?.originError}] [${loggerPayload.severity}]`,
-    //   `payload: ${JSON.stringify(loggerPayload.payload)}`,
-    // );
+    console.warn(
+      `<<<< ENVIANDO TRAZA AL BM-LOGGER [${loggerPayload?.originError}] [${loggerPayload.severity}]`,
+      `payload: ${JSON.stringify(loggerPayload.payload)}`,
+    );
     // console.log(
     //   '---',
     //   'fromGlobalError:',
-    //   errorObj?.payload?.[OriginError.$$BM_GLOBAL_ERROR_HANDLER],
+    //   errorObj?.payload?.[OriginError.$BM_GLOBAL_ERROR_HANDLER],
     //   'fromInterceptor:',
     //   errorObj?.payload?.[OriginError.$BM_HTTP_INTERCEPTOR],
     //   'fromListener:',
@@ -71,12 +71,13 @@ export class LogsService {
 
   private generateMessage(payload: any): any {
     try {
+      const stackTrace = payload?.stack?.toString();
       return {
         timestamp: new Date(),
         mensajeErrordescritivo:
           payload instanceof HttpErrorResponse
             ? JSON.stringify(payload)
-            : payload.toString(),
+            : stackTrace || payload.toString(),
       };
     } catch (error) {
       return {
@@ -87,7 +88,7 @@ export class LogsService {
   }
 
   private generateErrorObject(errorObj: ERROR_OBJECT): ERROR_OBJECT {
-    this.monkeyPatchError(errorObj?.originError, errorObj?.payload);
+    this.createPatchedError(errorObj?.originError, errorObj?.payload);
 
     return {
       payload: this.generateMessage(errorObj?.payload),
@@ -96,10 +97,13 @@ export class LogsService {
     };
   }
 
-  private monkeyPatchError(originError: OriginError, nativeError: any): void {
-    if (typeof nativeError === 'object') {
+  private createPatchedError(originError: OriginError, nativeError: any): void {
+    if (typeof nativeError === 'object' && nativeError !== null) {
       (nativeError as any)[originError] = true;
-    } else {
+    } 
+    else {
+      // REVISAR ESTA PARTE cuando no genera un objeto HttpErrorResponse  
+      // //para añadirle el flag esto no funciona
       nativeError = new Error(nativeError?.toString() || 'Unknown error');
       (nativeError as any)[originError] = true;
     }
