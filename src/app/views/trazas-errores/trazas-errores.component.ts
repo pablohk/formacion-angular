@@ -31,7 +31,7 @@ export class TrazasErroresComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('TrazasErroresComponent initialized');
-    this.logsService.handleLogError({
+    this.logsService.handleLog({
       payload: 'ngOnInit success',
       severity: LogSeverity.LOG,
       originError: OriginError.$BM_MANUALLY_ERROR,
@@ -47,7 +47,7 @@ export class TrazasErroresComponent implements OnInit {
 
   testErrorThrow(): void {
     console.clear();
-    throw new Error('testErrorThrow');
+    throw ('testErrorThrow');
   }
 
   testErrorThrowTimeout(): void {

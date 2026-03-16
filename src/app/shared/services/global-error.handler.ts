@@ -100,11 +100,16 @@ export class GlobalErrorHandler implements ErrorHandler, OnDestroy {
         try {
           originalError.apply(console, args);
           const IsAllStringArgs = args.every((arg) => typeof arg === 'string');
+          const fromGlobalError = args.some(
+            (e) => e === OriginError.$BM_GLOBAL_ERROR_HANDLER,
+          );
           const errorStack: any = IsAllStringArgs
-            ? args.join(' ')
+            ? args
+                .filter((e) => e !== OriginError.$BM_GLOBAL_ERROR_HANDLER)
+                .join(' ')
             : args?.slice(-1)[0];
 
-          if (this.shouldLogConsoleError(errorStack)) {
+          if (this.shouldLogConsoleError(errorStack) && !fromGlobalError) {
             console.info('--- CONSOLE INTERCEPTOR ---');
             this.logError(errorStack, OriginError.$BM_CONSOLE_ERROR);
           }
@@ -125,14 +130,15 @@ export class GlobalErrorHandler implements ErrorHandler, OnDestroy {
    * @returns  boolean - true si el error debe ser registrado, false si ya ha sido registrado por otro mecanismo.
    */
   private shouldLogConsoleError(errorStack: any): boolean {
-    const alreadyLogged = [
+    const originToCheck  = [
       OriginError.$BM_HTTP_INTERCEPTOR,
       OriginError.$BM_GLOBAL_ERROR_HANDLER,
       OriginError.$BM_EVENT_LISTENER_ERROR,
       OriginError.$BM_EVENT_LISTENER_UNHANDLED_REJECTION,
       OriginError.$BM_CONSOLE_ERROR,
-    ].some((origin) => this.hasErrorOrigin(errorStack, origin));
-    return !alreadyLogged;
+    ]
+    const alreadyLogged= originToCheck.some((origin) => this.hasErrorOrigin(errorStack, origin));
+    return !alreadyLogged; 
   }
 
   /**
@@ -158,7 +164,7 @@ export class GlobalErrorHandler implements ErrorHandler, OnDestroy {
    * @param origin    - El origen del error, utilizado para categorizar y filtrar los logs en el servicio de logs.
    */
   private logError(payload: any, origin: OriginError): void {
-    this.logsService.handleLogError({
+    this.logsService.handleLog({
       payload,
       originError: origin,
       severity: LogSeverity.ERROR,

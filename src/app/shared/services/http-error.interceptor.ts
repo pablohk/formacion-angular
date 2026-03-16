@@ -9,7 +9,7 @@ export const httpErrorInterceptor: HttpInterceptorFn = (req, next) => {
     tap({
       error: (error: any) => {
         console.log('--- HTTP ERROR INTERCEPTOR TAP ---');
-        logsService.handleLogError({
+        logsService.handleLog({
           payload: error,
           originError: OriginError.$BM_HTTP_INTERCEPTOR,
           severity: LogSeverity.ERROR,

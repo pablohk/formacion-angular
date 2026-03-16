@@ -33,8 +33,8 @@ export class LogsService {
   /** inyectamos el bm-logger */
 
   /** publcamos metodos para el log, error, warn, info, debug */
-  public handleLogError(errorObj: ERROR_OBJECT): void {
-    const loggerPayload = this.generateErrorObject(errorObj);
+  public handleLog(errorObj: ERROR_OBJECT): void {
+    const loggerPayload = this.generateLogObject(errorObj);
     this.propagateErrorToConsole(errorObj);
     console.warn(
       `<<<< ENVIANDO TRAZA AL BM-LOGGER [${loggerPayload?.originError}] [${loggerPayload.severity}]`,
@@ -61,11 +61,11 @@ export class LogsService {
 
   /**
    *  Propaga el error al console.error para que pueda ser capturado por herramientas de monitoreo
-   * @param errorObj 
+   * @param errorObj
    */
   private propagateErrorToConsole(errorObj: ERROR_OBJECT): void {
     if (errorObj?.severity === LogSeverity.ERROR) {
-      console.error(errorObj?.payload);
+      console.error(errorObj?.originError, errorObj?.payload);
     }
   }
 
@@ -87,8 +87,9 @@ export class LogsService {
     }
   }
 
-  private generateErrorObject(errorObj: ERROR_OBJECT): ERROR_OBJECT {
-    this.createPatchedError(errorObj?.originError, errorObj?.payload);
+  private generateLogObject(errorObj: ERROR_OBJECT): ERROR_OBJECT {
+    errorObj?.severity === LogSeverity.ERROR &&
+      this.createPatchedError(errorObj?.originError, errorObj?.payload);
 
     return {
       payload: this.generateMessage(errorObj?.payload),
@@ -98,15 +99,10 @@ export class LogsService {
   }
 
   private createPatchedError(originError: OriginError, nativeError: any): void {
-    if (typeof nativeError === 'object' && nativeError !== null) {
-      (nativeError as any)[originError] = true;
-    } 
-    else {
-      // REVISAR ESTA PARTE cuando no genera un objeto HttpErrorResponse  
-      // //para añadirle el flag esto no funciona
-      nativeError = new Error(nativeError?.toString() || 'Unknown error');
-      (nativeError as any)[originError] = true;
+    if (typeof nativeError !== 'object') {
+      return;
     }
+    (nativeError as any)[originError] = true;
   }
 
   public searchFlagInNativeError(
